@@ -173,6 +173,8 @@ before_script:
   - cd build
   - MSGREGEXP="^.*translation completed for the source file.*$"
   - if [[ $TRAVIS_COMMIT_MESSAGE =~ $MSGREGEXP ]]; then DOCUMENTATION=ON; fi
+  - MSGREGEXP="^.*translations_.*$"
+  - if [[ $TRAVIS_PULL_REQUEST_BRANCH =~ $MSGREGEXP ]]; then DOCUMENTATION=ON; fi
   - echo "msg $TRAVIS_COMMIT_MESSAGE"
   # Doing the work
   - if [ "$DOCUMENTATION" == "OFF" ]; then cmake  -DPOSTGRESQL_VERSION=$POSTGRESQL_VERSION -DCMAKE_BUILD_TYPE=$BUILD_TYPE .. ; fi
